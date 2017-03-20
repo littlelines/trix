@@ -21,6 +21,7 @@ class Trix.AttachmentEditorController extends Trix.BasicObject
     @makeElementMutable()
     @makeCaptionEditable() if @attachment.isPreviewable()
     @addRemoveButton()
+    @addAlignmentControls()
 
   makeElementMutable: undoable ->
     do: => @element.dataset.trixMutable = true
@@ -42,6 +43,44 @@ class Trix.AttachmentEditorController extends Trix.BasicObject
     handleEvent("click", onElement: removeButton, withCallback: @didClickRemoveButton)
     do: => @element.appendChild(removeButton)
     undo: => @element.removeChild(removeButton)
+
+  addAlignmentControls: ->
+    @addLeftAlignmentControl()
+    @addRightAlignmentControl()
+    @addClearAlignmentControl()
+
+  addLeftAlignmentControl: undoable ->
+    leftAlignButton = makeElement
+      tagName: "button"
+      textContent: lang.leftAlign
+      className: classNames.attachment.leftAlignButton
+      attributes: type: "button", title: lang.leftAlign
+      data: trixMutable: true
+    handleEvent("click", onElement: leftAlignButton, withCallback: @didClickLeftAlignButton)
+    do: => @element.appendChild(leftAlignButton)
+    undo: => @element.removeChild(leftAlignButton)
+
+  addRightAlignmentControl: undoable ->
+    rightAlignButton = makeElement
+      tagName: "button"
+      textContent: lang.rightAlign
+      className: classNames.attachment.rightAlignButton
+      attributes: type: "button", title: lang.rightAlign
+      data: trixMutable: true
+    handleEvent("click", onElement: rightAlignButton, withCallback: @didClickRightAlignButton)
+    do: => @element.appendChild(rightAlignButton)
+    undo: => @element.removeChild(rightAlignButton)
+
+  addClearAlignmentControl: undoable ->
+    clearAlignButton = makeElement
+      tagName: "button"
+      textContent: lang.clearAlign
+      className: classNames.attachment.clearAlignButton
+      attributes: type: "button", title: lang.clearAlign
+      data: trixMutable: true
+    handleEvent("click", onElement: clearAlignButton, withCallback: @didClickClearAlignButton)
+    do: => @element.appendChild(clearAlignButton)
+    undo: => @element.removeChild(clearAlignButton)
 
   editCaption: undoable ->
     textarea = makeElement
@@ -81,6 +120,15 @@ class Trix.AttachmentEditorController extends Trix.BasicObject
     event.preventDefault()
     event.stopPropagation()
     @delegate?.attachmentEditorDidRequestRemovalOfAttachment(@attachment)
+
+  didClickLeftAlignButton: (event) =>
+    event.preventDefault()
+
+  didClickRightAlignButton: (event) =>
+    event.preventDefault()
+
+  didClickClearAlignButton: (event) =>
+    event.preventDefault()
 
   didClickCaption: (event) =>
     event.preventDefault()
