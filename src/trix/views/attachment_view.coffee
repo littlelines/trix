@@ -79,10 +79,11 @@ class Trix.AttachmentView extends Trix.ObjectView
     if extension = @attachment.getExtension()
       names.push(extension)
 
-    if @attachment.attributes.values.alignment
-      names.push("attachment-#{@attachment.attributes.values.alignment}")
-    else
-      names.push("attachment-clear")
+    if @attachment.isPreviewable()
+      if @attachment.attributes.values.alignment
+        names.push("attachment-#{@attachment.attributes.values.alignment}")
+      else
+        names.push("attachment-clear")
 
     names.join(" ")
 
