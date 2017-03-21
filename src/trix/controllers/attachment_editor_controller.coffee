@@ -123,12 +123,15 @@ class Trix.AttachmentEditorController extends Trix.BasicObject
 
   didClickLeftAlignButton: (event) =>
     event.preventDefault()
+    @attachment.setAttributes({alignment: "left"})
 
   didClickRightAlignButton: (event) =>
     event.preventDefault()
+    @attachment.setAttributes({alignment: "right"})
 
   didClickClearAlignButton: (event) =>
     event.preventDefault()
+    @attachment.setAttributes({alignment: "clear"})
 
   didClickCaption: (event) =>
     event.preventDefault()

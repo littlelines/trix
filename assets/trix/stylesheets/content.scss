@@ -47,16 +47,34 @@
     }
   }
 
+  .attachment-clear {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .attachment-left {
+    float: left;
+    margin: 5px 10px 5px 0px;
+  }
+
+  .attachment-right {
+    float: right;
+    margin: 5px 0px 5px 10px;
+  }
+
   .attachment {
     display: inline-block;
     position: relative;
     max-width: 100%;
-    margin: 0;
     padding: 0;
 
     .caption {
       padding: 0;
+      left: 0;
+      position: absolute;
       text-align: center;
+      width: 100%;
 
       .size {
         &:before {
@@ -66,9 +84,6 @@
     }
 
     &.attachment-preview {
-      width: 100%;
-      text-align: center;
-
       .caption {
         color: #666;
         font-size: 0.9em;
