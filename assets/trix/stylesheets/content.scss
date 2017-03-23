@@ -73,9 +73,12 @@
     .caption {
       padding: 0;
       left: 0;
+      overflow: hidden;
       position: absolute;
       text-align: center;
+      text-overflow: ellipsis;
       width: 100%;
+      white-space: nowrap;
 
       .size {
         &:before {
