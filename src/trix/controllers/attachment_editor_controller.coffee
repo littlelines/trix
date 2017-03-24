@@ -119,21 +119,25 @@ class Trix.AttachmentEditorController extends Trix.BasicObject
   didClickRemoveButton: (event) =>
     event.preventDefault()
     event.stopPropagation()
+    console.log "did click remove"
     @delegate?.attachmentEditorDidRequestRemovalOfAttachment(@attachment)
 
   didClickLeftAlignButton: (event) =>
     event.preventDefault()
     event.stopPropagation()
+    console.log "did click left"
     @attachment.setAttributes({alignment: "left"})
 
   didClickRightAlignButton: (event) =>
     event.preventDefault()
     event.stopPropagation()
+    console.log "did click right"
     @attachment.setAttributes({alignment: "right"})
 
   didClickClearAlignButton: (event) =>
     event.preventDefault()
     event.stopPropagation()
+    console.log "did click clear"
     @attachment.setAttributes({alignment: "clear"})
 
   didClickCaption: (event) =>
