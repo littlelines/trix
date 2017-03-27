@@ -32,7 +32,10 @@ trix-editor {
       }
     }
 
-    button.remove {
+    button.remove,
+    button.left-align,
+    button.right-align,
+    button.clear-align {
       cursor: pointer;
 
       &.icon {
@@ -42,8 +45,6 @@ trix-editor {
         z-index: 1;
         padding: 0;
         margin: 0;
-        top: -1.1em;
-        left: calc(50% - 0.8em);
         width: 1.8em;
         height: 1.8em;
         line-height: 1.8em;
@@ -62,7 +63,6 @@ trix-editor {
           left: 0.1em;
           opacity: 0.75;
           content: "";
-          background-image: $icon-remove;
           background-position: center;
           background-repeat: no-repeat;
           background-size: contain;
@@ -74,6 +74,50 @@ trix-editor {
 
         &::before {
           opacity: 1;
+        }
+      }
+    }
+
+    button.remove {
+      &.icon {
+        left: calc(50% - 0.8em);
+        top: -1.2em;
+      }
+
+      &::before {
+        background-image: $icon-remove;
+      }
+    }
+
+    button.left-align {
+      &.icon {
+        bottom: 1.1em;
+        left: calc(50% - 0.8em - 2em);
+
+        &::before {
+          background-image: $icon-left-align;
+        }
+      }
+    }
+
+    button.right-align {
+      &.icon {
+        bottom: 1.1em;
+        left: calc(50% - 0.8em + 2em);
+
+        &::before {
+          background-image: $icon-right-align;
+        }
+      }
+    }
+
+    button.clear-align {
+      &.icon {
+        bottom: 1.1em;
+        left: calc(50% - 0.8em);
+
+        &::before {
+          background-image: $icon-clear-align;
         }
       }
     }

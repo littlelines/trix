@@ -13,13 +13,14 @@ testGroup "Attachments", template: "editor_with_image", ->
   test "removing an image", (expectDocument) ->
     after 20, ->
       clickElement getFigure(), ->
-        closeButton = getFigure().querySelector(".#{Trix.config.css.classNames.attachment.removeButton.split(" ").join(".")}")
+        closeButton = getAttachmentButton(attachmentClassNames().removeButton)
+
         clickElement closeButton, ->
           expectDocument "ab\n"
 
   test "editing an image caption", (expectDocument) ->
     after 20, ->
-      clickElement findElement("figure"), ->
+      clickElement getFigure(), ->
         clickElement findElement("figcaption"), ->
           defer ->
             assert.ok findElement("textarea")
@@ -38,12 +39,33 @@ testGroup "Attachments", template: "editor_with_image", ->
       assert.equal captionElement.clientHeight, 0
       assert.equal getCaptionContent(captionElement), ""
 
-      clickElement findElement("figure"), ->
+      clickElement getFigure(), ->
         # Caption prompt is displayed when editing attachment
         captionElement = findElement("figcaption")
         assert.ok captionElement.clientHeight > 0
         assert.equal getCaptionContent(captionElement), Trix.config.lang.captionPrompt
         done()
+
+  test "aligning and re-aligning an attachment", (done) ->
+    after 20, ->
+      assert.equal getFigure().classList.value, "attachment attachment-preview attachment-clear"
+
+      clickElement getFigure(), ->
+        leftAlignButton = getAttachmentButton(attachmentClassNames().leftAlignButton)
+        clearAlignButton = getAttachmentButton(attachmentClassNames().clearAlignButton)
+        rightAlignButton = getAttachmentButton(attachmentClassNames().rightAlignButton)
+
+        clickElement leftAlignButton, ->
+          assert.equal getFigure().classList.value, "attachment attachment-preview attachment-left"
+
+        defer ->
+          clickElement clearAlignButton, ->
+            assert.equal getFigure().classList.value, "attachment attachment-preview attachment-clear"
+
+          defer ->
+            clickElement rightAlignButton, ->
+              assert.equal getFigure().classList.value, "attachment attachment-preview attachment-right"
+              done()
 
 getFigure = ->
   findElement("figure")
@@ -54,6 +76,11 @@ findElement = (selector) ->
 getCaptionContent = (element) ->
   element.textContent or getPseudoContent(element)
 
+attachmentClassNames = ->
+  Trix.config.css.classNames.attachment
+
+getAttachmentButton = (buttonClass) ->
+  getFigure().querySelector(".#{buttonClass.split(" ").join(".")}")
 
 getPseudoContent = (element) ->
   before = getComputedStyle(element, "::before").content

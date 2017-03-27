@@ -1,5 +1,6 @@
 .trix-content {
   line-height: 1.5;
+  overflow: auto;
 
   h1 {
     font-size: 1.2em;
@@ -47,16 +48,37 @@
     }
   }
 
+  .attachment-clear {
+    margin: 15px 0px 20px 0px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .attachment-left {
+    float: left;
+    margin: 5px 10px 5px 0px;
+  }
+
+  .attachment-right {
+    float: right;
+    margin: 5px 0px 5px 10px;
+  }
+
   .attachment {
     display: inline-block;
     position: relative;
     max-width: 100%;
-    margin: 0;
     padding: 0;
 
     .caption {
       padding: 0;
+      left: 0;
+      overflow: hidden;
+      position: absolute;
       text-align: center;
+      text-overflow: ellipsis;
+      width: 100%;
+      white-space: nowrap;
 
       .size {
         &:before {
@@ -66,9 +88,6 @@
     }
 
     &.attachment-preview {
-      width: 100%;
-      text-align: center;
-
       .caption {
         color: #666;
         font-size: 0.9em;
