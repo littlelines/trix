@@ -39,7 +39,7 @@ class Trix.AttachmentEditorController extends Trix.BasicObject
       textContent: lang.remove
       className: classNames.attachment.removeButton
       attributes: type: "button", title: lang.remove
-      data: trixMutable: true
+      data: trixMutable: true, trixSerialize: false
     handleEvent("click", onElement: removeButton, withCallback: @didClickRemoveButton)
     do: => @element.appendChild(removeButton)
     undo: => @element.removeChild(removeButton)
@@ -55,7 +55,7 @@ class Trix.AttachmentEditorController extends Trix.BasicObject
       textContent: lang.leftAlign
       className: classNames.attachment.leftAlignButton
       attributes: type: "button", title: lang.leftAlign
-      data: trixMutable: true
+      data: trixMutable: true, trixSerialize: false
     handleEvent("click", onElement: leftAlignButton, withCallback: @didClickLeftAlignButton)
     do: => @element.appendChild(leftAlignButton)
     undo: => @element.removeChild(leftAlignButton)
@@ -66,7 +66,7 @@ class Trix.AttachmentEditorController extends Trix.BasicObject
       textContent: lang.rightAlign
       className: classNames.attachment.rightAlignButton
       attributes: type: "button", title: lang.rightAlign
-      data: trixMutable: true
+      data: trixMutable: true, trixSerialize: false
     handleEvent("click", onElement: rightAlignButton, withCallback: @didClickRightAlignButton)
     do: => @element.appendChild(rightAlignButton)
     undo: => @element.removeChild(rightAlignButton)
@@ -77,7 +77,7 @@ class Trix.AttachmentEditorController extends Trix.BasicObject
       textContent: lang.clearAlign
       className: classNames.attachment.clearAlignButton
       attributes: type: "button", title: lang.clearAlign
-      data: trixMutable: true
+      data: trixMutable: true, trixSerialize: false
     handleEvent("click", onElement: clearAlignButton, withCallback: @didClickClearAlignButton)
     do: => @element.appendChild(clearAlignButton)
     undo: => @element.removeChild(clearAlignButton)
